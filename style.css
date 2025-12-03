@@ -1,11 +1,21 @@
+/* ------------------------------------------- */
+/* 1. 全局 CSS 變數與字體設置 (整合自 index..html 的 <style>)*/
+/* ------------------------------------------- */
 :root {
-    --bg-color: #0d1117;
-    --card-bg: #161b22;
-    --text-color: #c9d1d9;
-    --accent-color: #007bff;
-    --secondary-accent: #0056b3;
-    --info-color: #798692;
-    --success-color: #2ea043;
+    /* 顏色主題 - 採用 GitHub Dark 風格與紫色/粉色強調 */
+    --color-bg: #0d1117; /* 極深背景 */
+    --color-card-bg: #161b22; /* 卡片背景 */
+    --color-text-light: #c9d1d9; /* 淺灰文字 */
+    --color-text-muted: #798692; /* 次要/提示文字 */
+    --color-border: #30363d; /* 邊框 */
+
+    /* 強調色 */
+    --color-primary: #8B5CF6; /* 紫色 (主要) */
+    --color-secondary: #EC4899; /* 粉色 (次要) */
+    --color-success: #2ea043; /* 成功/確認 (綠色) */
+    --color-error: #F87171; /* 錯誤 (紅色) */
+    
+    --color-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* 基本重置與字體設定 */
@@ -16,316 +26,182 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    /* 設置 Inter 字體，讓整體設計更現代 */
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     line-height: 1.6;
     min-height: 100vh;
+    background-color: var(--color-bg);
+    color: var(--color-text-light);
 }
 
-/* 導航欄樣式 */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 80px;
-    background-color: var(--bg-color);
-    border-bottom: 1px solid #1c232e;
-}
+/* ------------------------------------------- */
+/* 2. 組件樣式增強 (COMPONENT STYLES)          */
+/* ------------------------------------------- */
 
-.navbar .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-.navbar nav a {
-    color: var(--info-color);
-    text-decoration: none;
-    margin-left: 30px;
-    transition: color 0.3s;
-}
-
-.navbar nav a:hover,
-.navbar nav a.active {
-    color: var(--text-color);
-}
-
-/* 英雄區塊樣式 */
-.hero-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 100px 80px;
+/* 主要容器和卡片 (使用 Tailwind 類別配合 CSS 變數) */
+.app-container {
     max-width: 1200px;
-    margin: 0 auto;
+    padding: 1.5rem;
 }
 
-.left-content {
-    flex: 1;
-    max-width: 60%;
-}
-
-.greeting {
-    color: var(--accent-color);
-    font-size: 16px;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-}
-
-.left-content h1 {
-    font-size: 64px;
-    margin-bottom: 15px;
-    line-height: 1.1;
-}
-
-.left-content .info {
-    color: var(--accent-color);
-    font-size: 18px;
-    margin-bottom: 25px;
-}
-
-.left-content .description {
-    font-size: 18px;
-    color: var(--info-color);
-    margin-bottom: 40px;
-}
-
-/* 倒數計時器樣式 */
-.countdown-box {
-    background-color: var(--card-bg);
-    padding: 15px 25px;
-    border-radius: 8px;
-    display: inline-block;
-    margin-bottom: 40px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
-}
-
-.countdown-box p {
-    color: var(--info-color);
-    margin-bottom: 5px;
-}
-
-.countdown-box .timer {
-    font-size: 28px;
-    font-weight: bold;
-    color: #ff9800;
-    display: flex;
-    gap: 10px;
-}
-
-.countdown-box .timer .time-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    line-height: 1.2;
-}
-
-.countdown-box .timer .time-unit span {
-    font-size: 12px;
-    font-weight: normal;
-    color: var(--info-color);
-}
-
-/* 按鈕樣式 */
-.actions a {
-    text-decoration: none;
-    padding: 12px 25px;
-    border-radius: 6px;
-    font-weight: bold;
-    margin-right: 15px;
-    transition: background-color 0.3s, transform 0.2s;
-    display: inline-block;
-}
-
-.btn.primary {
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-}
-
-.btn.primary:hover {
-    background-color: var(--secondary-accent);
-}
-
-.btn.secondary {
-    background-color: transparent;
-    color: var(--text-color);
-    border: 2px solid var(--text-color);
-}
-
-.btn.secondary:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* 右側視覺樣式 */
-.right-visual {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.visual-placeholder {
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    background-image: linear-gradient(135deg, #1f2a38, #3e5068);
-    box-shadow: 0 0 40px rgba(0, 123, 255, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 80px;
-    color: white;
-    overflow: hidden;
-}
-
-/* 社群連結區塊 */
-.channels-section {
-    padding: 80px;
-    text-align: center;
-}
-
-.channels-section h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-    color: var(--text-color);
-}
-
-.social-links {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.social-btn {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: background-color 0.3s, transform 0.2s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.social-btn:hover {
-    background-color: #242933;
-    transform: translateY(-2px);
-}
-
-.social-btn i {
-    font-size: 20px;
-    margin-right: 15px;
-    width: 25px;
-    text-align: center;
-}
-
-/* 聯絡區塊樣式 */
-.contact-section {
-    padding: 80px;
-    text-align: center;
-}
-
-.contact-section h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-    color: var(--text-color);
-}
-
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: var(--card-bg);
-    padding: 30px;
+.card {
+    background-color: var(--color-card-bg);
+    box-shadow: var(--color-shadow);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
+/* 按鈕視覺優化 */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px; 
     font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #30363d;
-    background-color: #0d1117;
-    color: var(--text-color);
-    border-radius: 6px;
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+}
+
+.btn-primary:hover {
+    background-color: #7C3AED; 
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background-color: var(--color-success);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #248c35;
+    transform: translateY(-1px);
+}
+
+.btn-error {
+    background-color: var(--color-error);
+    color: white;
+}
+
+.btn-error:hover {
+    background-color: #D64545; 
+    transform: translateY(-1px);
+}
+
+/* 輸入框和選擇框 */
+.input-field, .select-field, .form-group input, .form-group textarea, .form-group select {
+    width: 100%; /* 確保寬度佔滿 */
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-light);
+    padding: 0.65rem 1rem;
+    border-radius: 6px; 
     font-size: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group textarea {
     resize: vertical;
-    min-height: 150px;
+    min-height: 150px; 
 }
 
-.submit-btn {
+.input-field:focus, .select-field:focus, .form-group input:focus, .form-group textarea:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3); /* Focus Ring */
+}
+
+/* 檔案列表項目 */
+.file-item {
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color 0.2s ease;
+}
+
+.file-item:hover {
+    background-color: #242c38; /* Slightly darker hover */
+}
+
+/* 倒數計時器樣式 */
+.countdown-display {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: clamp(1.5rem, 5vw, 3rem); /* 響應式字體大小 */
+    font-weight: 700;
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    background-color: var(--color-bg);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 2px solid var(--color-primary);
+}
+
+/* ------------------------------------------- */
+/* 3. Modal 模態框樣式                          */
+/* ------------------------------------------- */
+
+/* 讓 Modal 預設是全黑背景且置中 */
+#modal-backdrop {
+    display: none; /* 初始隱藏 */
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+#modal-backdrop.flex {
+    display: flex; /* 顯示時覆蓋整個視口 */
+}
+
+#file-modal {
+    max-width: 500px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 範圍滑桿美化 (Range Slider) */
+input[type="range"] {
+    -webkit-appearance: none;
     width: 100%;
-    background-color: var(--success-color);
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
+    height: 8px;
+    background: var(--color-border);
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background 0.2s;
 }
 
-.submit-btn:hover {
-    background-color: #218635;
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-secondary);
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(236, 72, 153, 0.7);
 }
 
-/* 響應式調整 (手機版) */
-@media (max-width: 900px) {
-    .navbar,
-    .hero-section {
-        padding: 20px 40px;
-    }
-
-    .hero-section {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .left-content {
-        max-width: 100%;
-        margin-bottom: 50px;
-    }
-
-    .left-content h1 {
-        font-size: 48px;
-    }
-
-    .right-visual {
-        justify-content: center;
-    }
-
-    .social-links {
-        flex-direction: column;
-    }
-
-    .channels-section,
-    .contact-section {
-        padding: 40px 20px;
-    }
-
-    .contact-form {
-        padding: 20px;
-    }
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-secondary);
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(236, 72, 153, 0.7);
+    border: none;
 }
